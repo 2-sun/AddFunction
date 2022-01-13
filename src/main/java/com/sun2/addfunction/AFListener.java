@@ -31,7 +31,7 @@ public class AFListener implements Listener {
             else if (event.getSlot() == 52) { // 클릭한 slot이 52(빨간 유리판)이라면
                 event.getWhoClicked().closeInventory();
             }
-        } catch (Exception e) { // 클릭한 인벤토리의 이름이 플레이어의 이름이 아니라면
+        } catch (Exception e) { // 클릭한 인벤토리의 이름이 플레이어의 이름이 아니라면ㄱ
             return;
         }
     }
