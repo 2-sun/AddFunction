@@ -1,0 +1,10 @@
+name: AddFunction
+version: '${project.version}'
+main: com.sun2.addfunction.AddFunction
+api-version: 1.18
+commands:
+  af:
+    description: Add Fuctions Command # 커맨드에 대한 설명
+    aliases: # 아래를 입력해도 'af'를 입력한 것과 같음
+      - addFunction
+      - AF
