@@ -9,6 +9,7 @@ public final class AddFunction extends JavaPlugin {
         getCommand("af").setExecutor(new AFCommand(this));
         getServer().getPluginManager().registerEvents(new AFListener(this), this);
         saveConfig();
+        getLogger().info("plugin is ready");
     }
 
     @Override

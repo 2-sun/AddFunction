@@ -90,10 +90,10 @@ public class AFCommand implements CommandExecutor {
             else if (args[0].equalsIgnoreCase("manageInv")) { // 입력한 명령어가 '/af manageInv'라면
                 try {
                     Player target = mainPlugin.getServer().getPlayer(args[1]); // 입력받은 플레이어 저장
-                    if (target == p) { // 입력받은 플레이어가 본인 이라면
-                        p.sendMessage("cannot manage your inventory");
-                        return false;
-                    }
+//                    if (target == p) { // 입력받은 플레이어가 본인 이라면
+//                        p.sendMessage("cannot manage your inventory");
+//                        return false;
+//                    }
                     p.openInventory(getPlayerInventory(target));
 
                 } catch (Exception e) { // 입력받은 것이 플레이어가 아니라면
