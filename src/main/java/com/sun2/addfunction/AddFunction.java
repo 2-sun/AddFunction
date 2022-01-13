@@ -7,6 +7,7 @@ public final class AddFunction extends JavaPlugin {
     @Override
     public void onEnable() {
         getCommand("af").setExecutor(new AFCommand(this));
+        getServer().getPluginManager().registerEvents(new AFListener(this), this);
         saveConfig();
     }
 
@@ -15,4 +16,3 @@ public final class AddFunction extends JavaPlugin {
         saveConfig();
     }
 }
-// -636 73 -337
