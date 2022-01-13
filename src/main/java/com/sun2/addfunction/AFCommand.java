@@ -1,12 +1,18 @@
 package com.sun2.addfunction;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class AFCommand implements CommandExecutor {
@@ -81,9 +87,27 @@ public class AFCommand implements CommandExecutor {
                 }
             }
 
+            else if (args[0].equalsIgnoreCase("manageInv")) { // 입력한 명령어가 '/af manageInv'라면
+                try {
+                    Player target = mainPlugin.getServer().getPlayer(args[1]); // 입력받은 플레이어 저장
+                    if (target == p) { // 입력받은 플레이어가 본인 이라면
+                        p.sendMessage("cannot manage your inventory");
+                        return false;
+                    }
+                    p.openInventory(getPlayerInventory(target));
+
+                } catch (Exception e) { // 입력받은 것이 플레이어가 아니라면
+                    p.sendMessage("enter correct player name");
+                }
+            }
+
             else if (args[0].equalsIgnoreCase("reload")) { // 입력한 명령어가 '/af reload'라면
                 mainPlugin.reloadConfig();
                 p.sendMessage("reload success");
+            }
+
+            else {
+                helpMessage(p);
             }
         }
         return false;
@@ -91,9 +115,37 @@ public class AFCommand implements CommandExecutor {
 
     private void helpMessage(Player p) {
         p.sendMessage("/af : help message");
-        p.sendMessage("/af tp (player's name) : send teleport request");
+        p.sendMessage("/af tp <player> : send teleport request");
         p.sendMessage("/af sethome : set this location to home");
         p.sendMessage("/af home : teleport to home");
+        p.sendMessage("/af manageInv <player> : manage player inventory");
         p.sendMessage("/af reload : reload config");
+    }
+
+    private Inventory getPlayerInventory(Player p) {
+        Inventory inv = mainPlugin.getServer().createInventory(null, 54, p.getName());
+        ItemStack blackGlass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+        PlayerInventory playerInventory = p.getInventory();
+
+        ArrayList<ItemStack> itemStacks = new ArrayList<>(Arrays.asList(playerInventory.getStorageContents()));
+
+        for (int i=0; i<36; i++) {
+            inv.setItem(i, itemStacks.get(i));
+        }
+        for (int i=36; i<45; i++) {
+            inv.setItem(i, blackGlass);
+        }
+
+        inv.setItem(45, p.getInventory().getItemInOffHand());
+        inv.setItem(46, blackGlass);
+        inv.setItem(47, playerInventory.getHelmet());
+        inv.setItem(48, playerInventory.getChestplate());
+        inv.setItem(49, playerInventory.getLeggings());
+        inv.setItem(50, playerInventory.getBoots());
+        inv.setItem(51, blackGlass);
+        inv.setItem(52, new ItemStack(Material.RED_STAINED_GLASS_PANE));
+        inv.setItem(53, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
+
+        return inv;
     }
 }
