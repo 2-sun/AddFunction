@@ -123,7 +123,7 @@ public class AFCommand implements CommandExecutor {
     }
 
     private Inventory getPlayerInventory(Player p) {
-        Inventory inv = mainPlugin.getServer().createInventory(null, 54, p.getName());
+        Inventory inv = mainPlugin.getServer().createInventory(null, 54, p.getName() + "'s inv");
         ItemStack blackGlass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         PlayerInventory playerInventory = p.getInventory();
 

@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class AFListener implements Listener {
     AddFunction mainPlugin;
-    Integer[] slots = {36, 37, 38, 39, 40, 41, 42, 43, 44, 46, 51, 52, 53};
+    Integer[] slots = {36, 37, 38, 39, 40, 41, 42, 43, 44, 46, 51, 52, 53}; // 클릭하면 이벤트를 취소한 slots
 
     public AFListener(AddFunction plugin) {
         mainPlugin = plugin;
